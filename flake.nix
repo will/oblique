@@ -1,7 +1,6 @@
 {
   inputs = {
     naersk.url = "github:nix-community/naersk/master";
-#    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     utils.url = "github:numtide/flake-utils";
   };
 
@@ -12,6 +11,7 @@
         naersk-lib = pkgs.callPackage naersk { };
       in
       {
+        name = "oblique";
         defaultPackage = naersk-lib.buildPackage ./.;
         devShell = with pkgs; mkShell {
           buildInputs = [ cargo rustc rustfmt pre-commit rustPackages.clippy ];
