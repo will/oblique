@@ -1,7 +1,7 @@
 use rand::seq::SliceRandom;
 
 fn main() {
-    let sayings: Vec<&str> = vec![
+    let cards: Vec<&str> = vec![
 "Abandon normal instruments [1st ed.]",
 "Accept advice [1st ed.]",
 "Accretion [1st ed.]",
@@ -470,5 +470,5 @@ fn main() {
 "Your mistake was a hidden intention [4th ed.]"
 ];
 
-    println!("{}", sayings.choose(&mut rand::thread_rng()).unwrap());
+    println!("{}", cards.choose(&mut rand::thread_rng()).unwrap());
 }

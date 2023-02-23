@@ -1,4 +1,6 @@
 {
+  description = "Oblique Strategies";
+
   inputs = {
     naersk.url = "github:nix-community/naersk/master";
     utils.url = "github:numtide/flake-utils";
@@ -11,9 +13,8 @@
         naersk-lib = pkgs.callPackage naersk { };
       in
       {
-        name = "oblique";
-        defaultPackage = naersk-lib.buildPackage ./.;
-        devShell = with pkgs; mkShell {
+        packages.default = naersk-lib.buildPackage ./.;
+        devShells.default = with pkgs; mkShell {
           buildInputs = [ cargo rustc rustfmt pre-commit rustPackages.clippy ];
           RUST_SRC_PATH = rustPlatform.rustLibSrc;
         };
