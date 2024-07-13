@@ -1,5 +1,4 @@
 const std = @import("std");
-const fs = std.fs;
 
 const Strats = blk: {
     @setEvalBranchQuota(200_000);
