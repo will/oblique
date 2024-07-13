@@ -2,12 +2,14 @@
   description = "Zig project flake";
 
   inputs = {
+    zls.url = "github:zigtools/zls?ref=0.13.0";
     zig2nix.url = "github:Cloudef/zig2nix";
   };
 
-  outputs = { zig2nix, ... }: let
+  outputs = { zig2nix, zls, ... }: let
     flake-utils = zig2nix.inputs.flake-utils;
   in (flake-utils.lib.eachDefaultSystem (system: let
+      zlsPkg = zls.packages.${system}.default;
       # Zig flake helper
       # Check the flake.nix in zig2nix project for more options:
       # <https://github.com/Cloudef/zig2nix/blob/master/flake.nix>
@@ -79,6 +81,8 @@
       apps.zon2nix = env.app [env.zon2nix] "zon2nix \"$@\"";
 
       # nix develop
-      devShells.default = env.mkShell {};
+      devShells.default = env.mkShell {
+        nativeBuildInputs = [zlsPkg];
+      };
     }));
 }
